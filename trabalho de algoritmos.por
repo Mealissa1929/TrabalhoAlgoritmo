@@ -5,16 +5,31 @@ programa
 	// Bibliotecas
 	inclua biblioteca Texto
 	inclua biblioteca Util
+	inclua biblioteca Tipos
+	inclua biblioteca Matematica
 
 	// Informações Importantes
 	cadeia NomePersonagem = ""
 	cadeia PersonagemSecundario = ""
 	cadeia Pronome[] = {"Ele", "Dele", "O", "ele", "dele", "o"}
-	logico EscolheuSeAliar = falso
-	logico EscolheuColaborar = falso
 	inteiro Resposta = 0
 
-	// Variáveis
+	// Escolhas
+	logico EscolheuSeAliar = falso
+	logico EscolheuColaborar = falso
+
+	// Variáveis de Status
+	real Forca = 4.0
+	real Vida = 100.0
+	inteiro Fome = 100
+	inteiro Sede = 100
+	cadeia Inventario[100]
+	cadeia Arma = "Punhos"
+
+	// Listas Importantes
+	cadeia InformacoesItens[][2] = { {"Pão", "15"} , {"Água", "5"} }
+	
+	// Imagens
 	cadeia ImagemFaca[] = {                                        
 		"                                     :",     
 		"                                  .:=#",     
@@ -162,10 +177,18 @@ programa
 		)
 
 		se(Resposta == 1){
-			carregarImagem("Você encontrou mantimentos!", ImagemMantimentos)
+			carregarImagem("Você encontrou alguns mantimentos!", ImagemMantimentos)
+			Inventario[0] = "Pão"
+			Inventario[1] = "Água"
 		}senao{
 			carregarImagem("Você encontrou uma faca!", ImagemFaca)
+			Forca += 2
+			Arma = "Faca"
 		}
+
+		typewriter("Eita! Você esbarrou com um adversário no caminho de volta.\n", falso)
+		typewriter("Você terá que lutar!", verdadeiro)
+		luta("Nome do Oponente", 50.0, 5.0)
 	}
 	
 	funcao escolheuSeAliar(){
@@ -257,6 +280,108 @@ programa
 	{
 		diaUm()
 		//dialogos()
+	}
+
+	funcao logico mostrarInventario(){
+		limpa()
+		cadeia ItemEscolhido
+		escreva("SEU INVENTÁRIO:\n\n")
+		para(inteiro i = 0; i < 100; i++){
+			se(Inventario[i] != ""){
+				escreva("[",i + 1,"] ", Inventario[i], ": Recupera ")
+				para(inteiro j = 0; j < 100; j++){
+					se(InformacoesItens[j][0] == Inventario[i]){
+						escreva(InformacoesItens[j][1], " de vida.\n")
+						pare
+					}
+				}
+			}
+		}
+		escreva("\nEscolha um item ou digite \"SAIR\" para sair do inventário.\n")
+		leia(ItemEscolhido)
+
+		se(ItemEscolhido != "SAIR" e ItemEscolhido != ""){
+			inteiro Escolhido = Tipos.cadeia_para_inteiro(ItemEscolhido, 10)
+			
+			para(inteiro i = 0; i < 100; i++){
+				se(InformacoesItens[i][0] == Inventario[Escolhido - 1]){
+					inteiro VidaRecuperada = Tipos.cadeia_para_inteiro(InformacoesItens[i][1], 10)
+					Vida += VidaRecuperada
+
+					se(Vida > 100){
+						VidaRecuperada -= (Vida - 100)
+						Vida = 100.0
+					}
+
+					limpa()
+
+					typewriter("Você recuperou " + VidaRecuperada + " de vida!", verdadeiro)
+
+					pare
+				}
+			}
+			
+			Inventario[Escolhido - 1] = ""
+
+			retorne verdadeiro
+		}senao{
+			retorne falso
+		}
+	}
+
+	funcao atacar(real &VidaAdversario){
+		limpa()
+		
+		real Dano = Matematica.arredondar(Forca * Util.sorteia(2, 5) / Util.sorteia(1, 3), 0) 
+		VidaAdversario -= Dano
+		typewriter("Você atacou o adversário e deu " + Dano + " de dano!",verdadeiro)
+	}
+
+	funcao luta(cadeia NomeAdversario, real VidaAdversario, real ForcaAdversario){
+		real VidaOriginal = VidaAdversario
+		inteiro Opcao
+		enquanto(VidaAdversario > 0 e Vida > 0){
+			logico Agiu
+			faca{
+				escreva("=== LUTA ===\n")
+				escreva("Adversário: ", NomeAdversario, "\n")
+				escreva("Vida do Adversário: " , VidaAdversario , "/", VidaOriginal, "\n\n")
+				escreva("SUA VIDA: ", Vida, "/100\n")
+				escreva("SUA ARMA: ", Arma, "\n\n")
+				escreva("[1] Atacar\n")
+				escreva("[2] Inventário\n")
+	
+				leia(Opcao)
+	
+				se(Opcao == 1){
+					Agiu = verdadeiro
+					atacar(VidaAdversario)
+				}senao{
+					Agiu = mostrarInventario()
+				}
+				limpa()
+			}enquanto(nao Agiu)
+
+			se(VidaAdversario > 0){
+				typewriter("É a vez do adversário atacar!\n",falso)
+				typewriter("...\n\n",falso)
+				Util.aguarde(2000)
+
+				real Dano = Matematica.arredondar(ForcaAdversario * Util.sorteia(2, 3) / Util.sorteia(1, 4), 0)
+				typewriter("Você levou " + Dano + " de dano!",verdadeiro)
+				Vida -= Dano
+			}senao{
+				typewriter("Você venceu a luta, parabéns!", verdadeiro)
+				pare
+			}
+
+			se(Vida <= 0){
+				escreva("=== FIM DE JOGO! Você morreu! ===")
+				Util.aguarde(1000000000)
+			}
+
+			
+		}
 	}
 
 	// FUNÇÃO QUE CARREGA IMAGENS
