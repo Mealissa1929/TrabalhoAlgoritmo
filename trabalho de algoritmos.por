@@ -11,6 +11,7 @@ programa
 	cadeia PersonagemSecundario = ""
 	cadeia Pronome[] = {"Ele", "Dele", "O", "ele", "dele", "o"}
 	logico EscolheuSeAliar = falso
+	logico EscolheuColaborar = falso
 	inteiro Resposta = 0
 
 	// Variáveis
@@ -35,7 +36,23 @@ programa
 	  	"   -=**##%+:",                               
 	  	"   -*%#%%+",                                 
 	  	"   :--==:"
-	}                                  
+	}
+
+	cadeia ImagemMantimentos[] = {
+	     "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░",
+	     "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▒▓▓░░░░░░░░",
+	     "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▒▓▓░░░░░░░░",
+	     "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▓▓▒▒▒▓▓▒░░░░░░",
+	     "░░░░░░░░░░░▒▒▒▒▒▓▓▓▓▓█▓▓▓▓▓▒▒░░░░░▓▒▒▒▒▒▒░░▓▒░░░░░",
+	     "░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓█▓▓▓░░░█▒▒▒▒▒▒░░▒▓░░░░░",
+	     "░░░░░░░░░░░▓▒▒▒▒▒▒▒█▓█▓▓▓▓█▓▓▒░░░░▒▒▒▓▓▓▓▒▒▒▒░░░░░",
+	     "░░░░░░░░░░░▓▒▒▒▒▒▒▒█▓█▓█▓▓█▓▓▒░░░░▓▒▒▒▒▒▒▒░▒▒░░░░░",
+	     "░░░░░░░░░░░▓▒▒▒▒▒▒▒█▓█▓█▓▓█▓▓▒░░░░▓▒▒▒▒▒▒░░▒▒░░░░░",
+	     "░░░░▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓█▓█▓█▓▓█▓▓▓▓▒▒░▒▒▒▓▒▒▒▒▒▒▒░░░░░",
+	     "░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░█▒▒▒▒▒▒▒░▒▓░░░░░",
+	     "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█▓▓▓▓▓▓▓▓▓▓░░░░░",
+	     "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"
+     }
 
 	funcao depoisDaConversa(){
 		typewriter("Mentor: Sem mais papo, vocês precisam se preparar para o desfile e as apresentações,\n",falso)
@@ -51,6 +68,8 @@ programa
 		)
 
 		se(EscolheuSeAliar e Resposta == 1){
+			EscolheuColaborar = verdadeiro
+			
 			typewriter(NomePersonagem + ": É melhor colaborarmos mesmo, nem tem como sobrevivermos pela nossa própria força.\n", falso)
 			typewriter(PersonagemSecundario + ": Por mais que a situação toda me repugne, é o que temos que fazer mesmo.\n", verdadeiro)
 
@@ -65,18 +84,88 @@ programa
 			typewriter(NomePersonagem + ": Acha que devemos colaborar?\n", falso)
 			typewriter(PersonagemSecundario + ": Não, em dois conseguimos comida e água, não vou me humilhar por mantimentos básicos.\n", falso)
 			typewriter(NomePersonagem + ": Concordo.", verdadeiro)
+			typewriter("=== APÓS O DESFILE E AS APRESENTAÇÕES ===\n", falso)
+			typewriter(NomePersonagem + ": Ainda bem que esse dia acabou.\n", falso)
+			typewriter(PersonagemSecundario + ": Sim, mas ainda temos que ver as notas que tiramos.\n\n", falso)
+			typewriter("Apresentador na TV: Josh do distrito 1 tirou 11, muito bem, vai chamar a atenção dos patrocinadores, mas dos outros tributos também haha(…)\n",falso)
+			typewriter("chegando ao distrito 12, " + NomePersonagem + " tirou 2 e " + PersonagemSecundario + " 1, Nada fora do comum para o distrito doze…\n", falso)
+			typewriter("Bom, espero que todos estejam preparados, amanhã os jogos começam.", verdadeiro)
+			
 		}senao se(Resposta == 1 e nao EscolheuSeAliar){
+			EscolheuColaborar = verdadeiro
+			
 			typewriter(NomePersonagem + ": É melhor colaborarmos mesmo, nem tem como sobrevivermos pela nossa própria força.\n", falso)
 			typewriter(PersonagemSecundario + ": Não tenho a menor intenção de me humilhar e virar conteúdo pra capital.\n", falso)
 			typewriter(NomePersonagem + ": ...", verdadeiro)
+			typewriter("=== APÓS O DESFILE E AS APRESENTAÇÕES ===\n", falso)
+			typewriter("Mentor: Vocês pareceram bem distantes no desfile, não é bom, mas como foram na apresentação?\n", falso)
+			typewriter(PersonagemSecundario + ": Irrelevante.\n", falso)
+			typewriter(NomePersonagem + ": Acho que tirei uma boa nota.\n", falso)
+			typewriter("Mentor: Bem, vamos descobrir.\n\n", falso)
+			typewriter("Apresentador na TV: Josh do distrito 1 tirou 11, muito bem, vai chamar a atenção dos patrocinadores,\n", falso)
+			typewriter("mas dos outros tributos também haha… chegando ao distrito 12, " + NomePersonagem + " tirou 12 e " + PersonagemSecundario + " 3.\n", falso)
+			typewriter("Pelo visto o distrito doze tem um elo fraco… Bom, espero que todos estejam preparados, amanhã os jogos começam.", verdadeiro)
 		}senao{
 			typewriter(NomePersonagem + ": Acha que devemos colaborar?\n", falso)
 			typewriter(PersonagemSecundario + ": Não.\n", falso)
 			typewriter(NomePersonagem + ": (...)\n", falso)
 			typewriter(NomePersonagem + ": É, concordo.", verdadeiro)
-			
+			typewriter("=== APÓS O DESFILE E AS APRESENTAÇÕES ===\n", falso)
+			typewriter(NomePersonagem + ": Ainda bem que esse dia acabou.\n", falso)
+			typewriter(PersonagemSecundario + ": Uhum.\n",falso)
+			typewriter(NomePersonagem + ": Vamos ver as notas de qualquer forma?\n",falso)
+			typewriter(PersonagemSecundario + ": Somos obrigados.\n\n",falso)
+			typewriter("Apresentador na TV: Josh do distrito 1 tirou 11, muito bem, vai chamar a atenção dos patrocinadores, mas dos outros tributos também haha(…)\n",falso)
+			typewriter("chegando ao distrito 12, " + NomePersonagem + " tirou 2 e " + PersonagemSecundario + " 1, Nada fora do comum para o distrito doze…\n",falso)
+			typewriter("Bom, espero que todos estejam preparados, amanhã os jogos começam.",verdadeiro)
 		}
 		
+	}
+	funcao diaUm(){
+		typewriter("Apresentador da TV: Bem vindos a 53° edição dos jogos vorazes! \n",falso)
+		typewriter("Os competidores já estão na arena aguardando o início dos jogos.\n",falso)
+		Util.aguarde(1000)
+		typewriter("3...\n",falso)
+		Util.aguarde(1000)
+		typewriter("2...\n",falso)
+		Util.aguarde(1000)
+		typewriter("1...\n",falso)
+		Util.aguarde(1000)
+		typewriter("Que os jogos comecem!", verdadeiro)
+         
+          Resposta = pergunta(
+			"Você quer ir para Cornucópia ou fugir e se esconder?\nCornucópia: Local no meio da arena onde ficam os mantimentos.",  // Pergunta
+			
+			
+			"Ir para a Cornucópia", // Alternativa 1
+			"Fugir", // Alternativa 2
+			"", // Alternativa 3 (OPCIONAL)
+			""  // Alternativa 4 (OPCIONAL)
+		)
+
+		se (Resposta == 1){
+			foiParaCornucopia()	
+		}senao{
+				
+		}
+		
+	}
+
+	funcao foiParaCornucopia(){
+		 Resposta = pergunta(
+			"O banho de sangue está acontecendo ao seu redor... Você quer pegar mantimentos ou uma arma branca?\nMantimentos: Comida e água.",  // Pergunta
+			
+			"Mantimentos", // Alternativa 1
+			"Arma Branca", // Alternativa 2
+			"", // Alternativa 3 (OPCIONAL)
+			""  // Alternativa 4 (OPCIONAL)
+		)
+
+		se(Resposta == 1){
+			carregarImagem("Você encontrou mantimentos!", ImagemMantimentos)
+		}senao{
+			carregarImagem("Você encontrou uma faca!", ImagemFaca)
+		}
 	}
 	
 	funcao escolheuSeAliar(){
@@ -88,8 +177,8 @@ programa
 	}
 
 	funcao naoEscolheuSeAliar(){
-		typewriter(PersonagemSecundario +": Se aliar seria uma boa ideia, não acha?",falso)
-		typewriter (NomePersonagem + ": Não pretendo me aliar a ninguém, não tem sentido",falso)
+		typewriter(PersonagemSecundario +": Se aliar seria uma boa ideia, não acha?\n",falso)
+		typewriter (NomePersonagem + ": Não pretendo me aliar a ninguém, não tem sentido\n",falso)
 		typewriter (PersonagemSecundario + ": Mas...",verdadeiro)
 		EscolheuSeAliar = falso
 		depoisDaConversa()
@@ -104,9 +193,11 @@ programa
 		typewriter("cada distrito deve conceder um tributo feminino e um masculino, os tributos lutam entre si e apenas um sairá vitorioso.\n\n", falso)
 		typewriter("Nossos personagens vivem no distrito 12, que foi o mais atingido e sofre as sequelas da antiga guerra.", verdadeiro)
 
+		
+
 		// ESCOLHA DE PERSONAGEM
 		Resposta = pergunta(
-			"Escolha seu personagem: Masculino ou Feminino?",  // Pergunta
+			"Escolha seu personagem: Masculino ou Feminino?",// Pergunta
 			
 			"masculino", // Alternativa 1
 			"feminino", // Alternativa 2
@@ -164,7 +255,8 @@ programa
 	// Inicialização
 	funcao inicio()
 	{
-		dialogos()
+		diaUm()
+		//dialogos()
 	}
 
 	// FUNÇÃO QUE CARREGA IMAGENS
@@ -227,3 +319,5 @@ programa
 	}
 
 }
+	
+	
