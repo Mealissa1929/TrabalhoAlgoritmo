@@ -9,17 +9,21 @@ programa
 	inclua biblioteca Matematica
 
 	// Informações Importantes
-	cadeia NomePersonagem = ""
-	cadeia PersonagemSecundario = ""
+	cadeia NomePersonagem = "Liam"
+	cadeia PersonagemSecundario = "Emma"
 	cadeia Pronome[] = {"Ele", "Dele", "O", "ele", "dele", "o"}
+	cadeia PronomeSecundario[] = {"Ela", "Dela", "A", "ela", "dela", "a"}
 	inteiro Resposta = 0
 
 	// Escolhas
 	logico EscolheuSeAliar = falso
 	logico EscolheuColaborar = falso
+	logico PassouPorCornucopia = falso
+	logico PegouMantimentos = falso
+	logico PegouFaca = falso
 
 	// Variáveis de Status
-	real Forca = 4.0
+	real Forca = 40.0
 	real Vida = 100.0
 	inteiro Fome = 100
 	inteiro Sede = 100
@@ -27,7 +31,7 @@ programa
 	cadeia Arma = "Punhos"
 
 	// Listas Importantes
-	cadeia InformacoesItens[][2] = { {"Pão", "15"} , {"Água", "5"} }
+	cadeia InformacoesItens[][] = { {"Pão", "15"} , {"Água", "5"} }
 	
 	// Imagens
 	cadeia ImagemFaca[] = {                                        
@@ -69,7 +73,105 @@ programa
 	     "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"
      }
 
+	// Inicialização
+	funcao inicio()
+	{
+		diaUm()
+		//introducao()
+	}
+
+	funcao introducao(){
+		// INTRODUÇÃO
+		typewriter("Há 53 anos, foram implementados os jogos vorazes,\n", falso)
+		typewriter("com a intenção de sempre lembrar os distritos da guerra e da sua derrota.\n\n",falso)
+		typewriter("A capital é quem comanda esses jogos que vão ficando cada vez mais tecnológicos e sangrentos,\n",falso)
+		typewriter("cada distrito deve conceder um tributo feminino e um masculino, os tributos lutam entre si e apenas um sairá vitorioso.\n\n", falso)
+		typewriter("Nossos personagens vivem no distrito 12, que foi o mais atingido e sofre as sequelas da antiga guerra.", verdadeiro)
+
+		
+
+		// ESCOLHA DE PERSONAGEM
+		Resposta = pergunta(
+			"Escolha seu personagem: Masculino ou Feminino?",// Pergunta
+			
+			"Masculino [Liam]", // Alternativa 1
+			"Feminino [Emma]", // Alternativa 2
+			"", // Alternativa 3 (OPCIONAL)
+			""  // Alternativa 4 (OPCIONAL)
+		)
+
+		// DEFINE PERSONAGEM
+		se(Resposta == 1){
+			NomePersonagem = "Liam"
+			PersonagemSecundario = "Emma"
+		}senao{
+			NomePersonagem = "Emma"
+			PersonagemSecundario = "Liam"
+
+			Pronome[0] = "Ela"
+			Pronome[1] = "Dela"
+			Pronome[2] = "A"
+			Pronome[3] = "ela"
+			Pronome[4] = "dela"
+			Pronome[5] = "a"
+
+			PronomeSecundario[0] = "Ele"
+			PronomeSecundario[1] = "Dele"
+			PronomeSecundario[2] = "O"
+			PronomeSecundario[3] = "ele"
+			PronomeSecundario[4] = "dele"
+			PronomeSecundario[5] = "o"
+		}
+
+		// EXPLICAÇÃO PERSONAGEM
+		typewriter(NomePersonagem + " nasceu no distrito 12, e desde os 12 anos é obrigad" + Pronome[5] + " a participar da colheita,\n",falso)
+		typewriter("onde dois moradores de doze à dezessete anos são mandados para os jogos vorazes.\n\n", falso)
+		typewriter("Até hoje " + Pronome[3] + " não foi sortead" + Pronome[5] + ", mesmo que acabe colocando seu nome várias vezes em troca de comida.\n", falso)
+		typewriter("Mas agora, com 16 anos, tudo mudará.", verdadeiro)
+
+		// DIÁLOGO SORTEIO
+		typewriter("=== DIA DA COLHEITA ===\n", falso)
+		typewriter("ANUNCIANTE: Hora de revelar os dois sorteados do distrito 12!\n\n", falso)
+		typewriter("...\n\n", falso)
+		Util.aguarde(2500)
+		typewriter("Os sorteados foram Emma e Liam!", verdadeiro)
+
+		//
+		Resposta = pergunta(
+			"Você quer se aliar ao seu(sua) companheiro(a) de distrito?",  // Pergunta
+			
+			"Sim", // Alternativa 1
+			"Não", // Alternativa 2
+			"", // Alternativa 3 (OPCIONAL)
+			""  // Alternativa 4 (OPCIONAL)
+		)
+
+		// DEFINE PERSONAGEM
+		se(Resposta == 1){
+			escolheuSeAliar()
+		}senao{
+			naoEscolheuSeAliar()
+		}
+	}
+
+	funcao escolheuSeAliar(){
+		typewriter(NomePersonagem + ": Vamos colaborar, assim a chance de um de nós sobreviver é maior. O que acha? \n", falso)
+		typewriter(PersonagemSecundario + ": Fechado, mas não quero conversa, só um de nós vai sobreviver mesmo...\n", falso)
+		typewriter (NomePersonagem + ": Como quiser...",verdadeiro)
+		EscolheuSeAliar = verdadeiro
+		depoisDaConversa()
+	}
+
+	funcao naoEscolheuSeAliar(){
+		typewriter(PersonagemSecundario +": Se aliar seria uma boa ideia, não acha?\n",falso)
+		typewriter (NomePersonagem + ": Não pretendo me aliar a ninguém, não tem sentido\n",falso)
+		typewriter (PersonagemSecundario + ": Mas...",verdadeiro)
+		EscolheuSeAliar = falso
+		depoisDaConversa()
+	}	
+
 	funcao depoisDaConversa(){
+		
 		typewriter("Mentor: Sem mais papo, vocês precisam se preparar para o desfile e as apresentações,\n",falso)
 		typewriter("colaborem com os jogos e ganharão mais patrocinadores, não que eu tenha colaborado na minha vez…", verdadeiro)
 
@@ -136,6 +238,7 @@ programa
 		}
 		
 	}
+	
 	funcao diaUm(){
 		typewriter("Apresentador da TV: Bem vindos a 53° edição dos jogos vorazes! \n",falso)
 		typewriter("Os competidores já estão na arena aguardando o início dos jogos.\n",falso)
@@ -161,7 +264,7 @@ programa
 		se (Resposta == 1){
 			foiParaCornucopia()	
 		}senao{
-				
+			cenaFloresta()
 		}
 		
 	}
@@ -177,10 +280,12 @@ programa
 		)
 
 		se(Resposta == 1){
+			PegouMantimentos = verdadeiro
 			carregarImagem("Você encontrou alguns mantimentos!", ImagemMantimentos)
-			Inventario[0] = "Pão"
-			Inventario[1] = "Água"
+			adicionarAoInventario("Pão")
+			adicionarAoInventario("Água")
 		}senao{
+			PegouFaca = verdadeiro
 			carregarImagem("Você encontrou uma faca!", ImagemFaca)
 			Forca += 2
 			Arma = "Faca"
@@ -188,100 +293,128 @@ programa
 
 		typewriter("Eita! Você esbarrou com um adversário no caminho de volta.\n", falso)
 		typewriter("Você terá que lutar!", verdadeiro)
-		luta("Nome do Oponente", 50.0, 5.0)
-	}
-	
-	funcao escolheuSeAliar(){
-		typewriter(NomePersonagem + ": Vamos colaborar, assim a chance de um de nós sobreviver é maior. O que acha? \n", falso)
-		typewriter(PersonagemSecundario + ": Fechado, mas não quero conversa, só um de nós vai sobreviver mesmo...\n", falso)
-		typewriter (NomePersonagem + ": Como quiser...",verdadeiro)
-		EscolheuSeAliar = verdadeiro
-		depoisDaConversa()
-	}
-
-	funcao naoEscolheuSeAliar(){
-		typewriter(PersonagemSecundario +": Se aliar seria uma boa ideia, não acha?\n",falso)
-		typewriter (NomePersonagem + ": Não pretendo me aliar a ninguém, não tem sentido\n",falso)
-		typewriter (PersonagemSecundario + ": Mas...",verdadeiro)
-		EscolheuSeAliar = falso
-		depoisDaConversa()
-	}
-
-	// Funções
-	funcao dialogos(){
-		// INTRODUÇÃO
-		typewriter("Há 53 anos, foram implementados os jogos vorazes,\n", falso)
-		typewriter("com a intenção de sempre lembrar os distritos da guerra e da sua derrota.\n\n",falso)
-		typewriter("A capital é quem comanda esses jogos que vão ficando cada vez mais tecnológicos e sangrentos,\n",falso)
-		typewriter("cada distrito deve conceder um tributo feminino e um masculino, os tributos lutam entre si e apenas um sairá vitorioso.\n\n", falso)
-		typewriter("Nossos personagens vivem no distrito 12, que foi o mais atingido e sofre as sequelas da antiga guerra.", verdadeiro)
-
 		
+		luta("Cole Jones", 50.0, 5.0)
 
-		// ESCOLHA DE PERSONAGEM
-		Resposta = pergunta(
-			"Escolha seu personagem: Masculino ou Feminino?",// Pergunta
-			
-			"masculino", // Alternativa 1
-			"feminino", // Alternativa 2
-			"", // Alternativa 3 (OPCIONAL)
-			""  // Alternativa 4 (OPCIONAL)
-		)
-
-		// DEFINE PERSONAGEM
-		se(Resposta == 1){
-			NomePersonagem = "Liam"
-			PersonagemSecundario = "Emma"
+		se(EscolheuSeAliar){
+			florestaComAliado()
 		}senao{
-			NomePersonagem = "Emma"
-			PersonagemSecundario = "Liam"
-
-			Pronome[0] = "Ela"
-			Pronome[1] = "Dela"
-			Pronome[2] = "A"
-			Pronome[3] = "ela"
-			Pronome[4] = "dela"
-			Pronome[5] = "a"
+			florestaSemAliado()
 		}
+	}
 
-		// EXPLICAÇÃO PERSONAGEM
-		typewriter(NomePersonagem + " nasceu no distrito 12, e desde os 12 anos é obrigad" + Pronome[5] + " a participar da colheita,\n",falso)
-		typewriter("onde dois moradores de doze à dezessete anos são mandados para os jogos vorazes.\n\n", falso)
-		typewriter("Até hoje " + Pronome[3] + " não foi sortead" + Pronome[5] + ", mesmo que acabe colocando seu nome várias vezes em troca de comida.\n", falso)
-		typewriter("Mas agora, com 16 anos, tudo mudará.", verdadeiro)
+	funcao florestaComAliado(){
+		typewriter("Você corre pro meio das árvores e começa a ouvir passos…\n\n",falso)
+		Util.aguarde(2000)
+		typewriter("(" + PersonagemSecundario + " chega com alguns mantimentos e um punhal)\n\n",falso)
 
-		// DIÁLOGO SORTEIO
-		typewriter("=== DIA DA COLHEITA ===\n", falso)
-		typewriter("ANUNCIANTE: Hora de revelar os dois sorteados do distrito 12!\n\n", falso)
-		typewriter("...\n\n", falso)
-		Util.aguarde(2500)
-		typewriter("Os sorteados foram Emma e Liam!", verdadeiro)
+		se(PegouMantimentos){
+			typewriter("(Vocês dividem os mantimentos)",verdadeiro)
 
-		//
-		Resposta = pergunta(
-			"Você quer se aliar ao seu(sua) companheiro(a) de distrito?",  // Pergunta
-			
-			"Sim", // Alternativa 1
-			"Não", // Alternativa 2
-			"", // Alternativa 3 (OPCIONAL)
-			""  // Alternativa 4 (OPCIONAL)
-		)
-
-		// DEFINE PERSONAGEM
-		se(Resposta == 1){
-			escolheuSeAliar()
+			typewriter(PersonagemSecundario + ": Você se machucou?\n",falso)
+			typewriter(NomePersonagem + ": Um pouco, eu precisei lutar pela mochila de mantimentos... mas venci.\n",falso)
+			typewriter(PersonagemSecundario + ": Ah...\n",falso)
+			typewriter(NomePersonagem + ": Bom, vamos nos esconder.",verdadeiro)
 		}senao{
-			naoEscolheuSeAliar()
+			adicionarAoInventario("Pão")
+			adicionarAoInventario("Água")
+			
+			typewriter("(" + PronomeSecundario[0] + " joga alguns pães e água para você)",verdadeiro)
+
+			typewriter(NomePersonagem + ": Você se machucou?\n",falso)
+			typewriter(PersonagemSecundario + ": Um pouco, eu precisei lutar pela mochila de mantimentos... mas venci.\n",falso)
+			typewriter(NomePersonagem + ": Ah...\n",falso)
+			typewriter(PersonagemSecundario + ": Bom, vamos nos esconder.",verdadeiro)
+		}
+	}
+
+	funcao florestaSemAliado(){
+		typewriter("Você corre pro meio das árvores e começa a ouvir passos…\n\n",falso)
+		Util.aguarde(2000)
+		typewriter("(" + PersonagemSecundario + " aparece segurando um punhal)\n\n",falso)
+		typewriter(NomePersonagem + ": " + PersonagemSecundario + "?\n\n",falso)
+
+		se(PegouFaca){
+			typewriter("(Você ameaça com a faca, buscando se defender)",verdadeiro)
+		}senao{
+			typewriter("(Você começa a andar para trás, buscando se defender)",verdadeiro)	
+		}
+		
+		typewriter(NomePersonagem + ": Você...\n",falso)
+
+		se(PegouFaca){
+			typewriter(PersonagemSecundario + ": Não vou fazer nada desta vez, mas se esconda.",verdadeiro)
+		}senao{
+			typewriter(PersonagemSecundario + ": Não vou fazer nada desta vez, mas se arme.",verdadeiro)
+		}
+		
+	}
+
+	funcao cenaFloresta(){
+		typewriter("Você correu para a floresta.", verdadeiro)
+		se(EscolheuSeAliar){
+			typewriter("Você corre pro meio das árvores e começa a ouvir passos…\n\n",falso)
+			Util.aguarde(2000)
+			typewriter("(" + PersonagemSecundario + " chega com alguns mantimentos e um punhal)\n\n",falso)
+
+			adicionarAoInventario("Pão")
+			adicionarAoInventario("Água")
+			
+			typewriter("(" + PronomeSecundario[0] + " joga alguns pães e água para você.)",verdadeiro)
+
+			typewriter("(Os adversários Cole Jones e Sophie Lewis seguiram " + PronomeSecundario[3] + " e atacam vocês desprevenidos,\n",falso)
+			typewriter("você terá que lutar com Sophie Lewis!",verdadeiro)
+			
+			luta("Sophie Lewis", 50.0, 5.0)
+
+			typewriter(PersonagemSecundario + ": Tudo bem? Quero dizer, dentro do possível...\n",falso)
+			typewriter(NomePersonagem + ": Vamos só nos esconder logo.\n", falso)
+			typewriter(PersonagemSecundario + ": Claro...",verdadeiro)
+		}senao{
+			florestaSemAliado()
 		}
 	}
 	
-	// Inicialização
-	funcao inicio()
-	{
-		diaUm()
-		//dialogos()
-	}
+	
 
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// NÃO MEXER NESSAS FUNÇÕES
+	// NÃO MEXER NESSAS FUNÇÕES
+	// NÃO MEXER NESSAS FUNÇÕES
+	// NÃO MEXER NESSAS FUNÇÕES
+	// NÃO MEXER NESSAS FUNÇÕES
+
+	funcao adicionarAoInventario(cadeia Item){
+		para(inteiro i = 0; i < 100; i++){
+			se(Inventario[i] == ""){
+				Inventario[i] = Item
+				pare
+			}
+		}
+	}
+	
 	funcao logico mostrarInventario(){
 		limpa()
 		cadeia ItemEscolhido
@@ -371,20 +504,21 @@ programa
 				typewriter("Você levou " + Dano + " de dano!",verdadeiro)
 				Vida -= Dano
 			}senao{
-				typewriter("Você venceu a luta, parabéns!", verdadeiro)
+				typewriter("Você venceu a luta!", verdadeiro)
 				pare
 			}
 
 			se(Vida <= 0){
 				escreva("=== FIM DE JOGO! Você morreu! ===")
-				Util.aguarde(1000000000)
+				enquanto(verdadeiro){
+					
+				}
 			}
 
 			
 		}
 	}
 
-	// FUNÇÃO QUE CARREGA IMAGENS
 	funcao carregarImagem(cadeia TextoPorCima, cadeia Imagem[]){
 		limpa()
 		typewriter(TextoPorCima + "\n\n", falso)
@@ -394,7 +528,6 @@ programa
 		esperarEnter()
 	}
 	
-	// ENTER PARA CONTINUAR
 	funcao esperarEnter(){
 		cadeia Esperando
 		escreva("\n\n[ENTER PARA CONTINUAR]\n\n")
@@ -402,7 +535,6 @@ programa
 		limpa()
 	}
 
-	// ANIMAÇÃO DO TEXTO
 	funcao typewriter(cadeia TextoParaType, logico Esperar){
 		para(inteiro i = 0; i < Texto.numero_caracteres(TextoParaType); i++){
 			escreva(Texto.extrair_subtexto(TextoParaType, i, i+1))
@@ -413,7 +545,6 @@ programa
 		}
 	}
 
-	// FUNÇÃO QUE RETORNA PERGUNTA ESCOLHIDA
 	funcao inteiro pergunta(cadeia Pergunta, cadeia A, cadeia B, cadeia C, cadeia D){
 		inteiro Escolha = 0
 
