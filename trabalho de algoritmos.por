@@ -23,7 +23,7 @@ programa
 	logico PegouFaca = falso
 
 	// Variáveis de Status
-	real Forca = 40.0
+	real Forca = 4.0
 	real Vida = 100.0
 	inteiro Fome = 100
 	inteiro Sede = 100
