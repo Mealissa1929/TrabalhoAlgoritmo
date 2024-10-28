@@ -16,14 +16,14 @@ programa
 	inteiro Resposta = 0
 
 	// Escolhas
-	logico EscolheuSeAliar = falso
+	logico EscolheuSeAliar = verdadeiro
 	logico EscolheuColaborar = falso
 	logico PassouPorCornucopia = falso
 	logico PegouMantimentos = falso
 	logico PegouFaca = falso
 
 	// Variáveis de Status
-	real Forca = 4.0
+	real Forca = 50.0
 	real Vida = 100.0
 	inteiro Fome = 100
 	inteiro Sede = 100
@@ -77,7 +77,7 @@ programa
 	funcao inicio()
 	{
 		//introducao()
-		//diaUm()
+		diaUm()
 		//DiaDois()
 	}
 
@@ -264,7 +264,7 @@ programa
 
 		se (Resposta == 1){
 			foiParaCornucopia()	
-			 FinalDiaUm()
+			FinalDiaUm()
 		}senao{
 			cenaFloresta()
 			FinalFloresta()
@@ -380,20 +380,17 @@ programa
 	}
 	funcao FinalDiaUm()
 	{
-		typewriter(NomePersonagem + ": Vamos achar um lugar para nos esconder.\n",falso)
-		typewriter ("Apresentador da TV: Eles andaram um pouco e encontram uma caverna.\n",falso)
-		typewriter (NomePersonagem + ": É um bom lugar para ficar.",falso)
+		typewriter(NomePersonagem + ": Vamos achar um lugar para nos esconder.\n\n",falso)
+		typewriter ("(Vocês andaram um pouco e encontraram uma caverna)\n\n",falso)
+		typewriter (NomePersonagem + ": É um bom lugar para ficar.\n",falso)
 		
 		
 		typewriter (PersonagemSecundario + ": Provavelmente não vão nos deixar ficar muito tempo afastados do resto…\n",falso)
 		typewriter (NomePersonagem + ": Bom, enquanto der vamos ficar, temos comida e água por uns dois dias.\n",falso)
-		typewriter (PersonagemSecundario + ": Eu levei um golpe na perna, se precisarmos correr…",falso)
+		typewriter (PersonagemSecundario + ": Eu levei um golpe na perna, se precisarmos correr…\n",falso)
 		
 		typewriter (NomePersonagem + ": A gente se ajuda.\n",falso)
-		typewriter (PersonagemSecundario + ": Vamos comer e esperar",falso )
-		
-		typewriter("Aguarde...",falso)
-		Util.aguarde(2000)
+		typewriter (PersonagemSecundario + ": Vamos comer e esperar...",verdadeiro)
 		
 		typewriter ( "Apresentador da TV: O dia foi intenso, tivemos 11 mortes no banho de sangue:\n\n",falso)
 		
@@ -419,91 +416,73 @@ programa
 		Util.aguarde(1000)
 		typewriter ( "Apresentador da TV: Avery Allen do distrito 11.",falso)
 		esperarEnter()
-		typewriter(NomePersonagem + ": É, já forma metade.\n",falso)
-		typewriter(PersonagemSecundario + "...\n",falso)
-		typewriter(PersonagemSecundario + ": Vamos nos revezar para vigiar e dormir",verdadeiro)
+		typewriter(NomePersonagem + ": É, já foi metade.\n",falso)
+		typewriter(PersonagemSecundario + ": ...\n",falso)
+		typewriter(PersonagemSecundario + ": Vamos nos revezar para vigiar e dormir.",verdadeiro)
 	
 	}
 
-	funcao FinalFloresta()
-{
-	inteiro sorteio = Util.sorteia(1,2)
-
-	se (sorteio == 1){
-		typewriter(" abrunhos \n",falso)
+	funcao FinalFloresta(){
 		
-		 
-	}senao{
-		typewriter ("belladonnas \n",falso)//venenosa
-		
-	}
-
-	Resposta = pergunta(
-			" Você quer comer a fruta?\n",  // Pergunta
+		inteiro sorteio = Util.sorteia(1,2)
+	
+		se (sorteio == 1){
+			typewriter("Você encontrou uma fruta chamada abrunhos.\n",falso) 
+		}senao{
+			typewriter("Você encontrou uma fruta chamada belladonnas.\n",falso) // Venenosa
 			
-			" Sim ", // Alternativa 1
-			"Não", // Alternativa 2
-			"", // Alternativa 3 (OPCIONAL)
-			""  // Alternativa 4 (OPCIONAL)
-
-		)
-	se (Resposta == 1 e sorteio  == 1){
+		}
+	
+		Resposta = pergunta(
+				"Você quer comer a fruta?",  // Pergunta
+				
+				"Sim", // Alternativa 1
+				"Não", // Alternativa 2
+				"", // Alternativa 3 (OPCIONAL)
+				""  // Alternativa 4 (OPCIONAL)
+	
+			)
+			
+		se (Resposta == 1 e sorteio  == 1){
 			typewriter (NomePersonagem + ": Ouvi um barulho de colisão a minha direita.\n",falso)
-			typewriter (NomePersonagem + " me escondo em uma moita e vejo Sophie Lewis lutando com outro jogador.\n",falso)
-			typewriter (NomePersonagem + ": Quando acaba a luta encontro uma faca caida no chão",falso)// colocar a imagem de uma faca
-			typewriter ( "bom, isso vai me ajudar agora só preciso de uma fonte de água.\n",verdadeiro)
-
-	
-	enquanto(sorteio == 2 ){
-
-		
-	 Resposta = pergunta(
-			" Você quer comer a fruta?\n",  // Pergunta
+			typewriter ("(Você se escondeu em uma moita e viu Sophie Lewis lutando com outro jogador)\n",verdadeiro)
+			carregarImagem("Após o fim daquela luta, você encontrou uma faca no chão!", ImagemFaca)
 			
-			" Sim ", // Alternativa 1
-			"Não", // Alternativa 2
-			"", // Alternativa 3 (OPCIONAL)
-			""  // Alternativa 4 (OPCIONAL)
-
-		)
-		se (Resposta == 1 e sorteio == 2) {
-		typewriter (NomePersonagem + ": Comi a fruta ela tinha um gosto amargo.\n",falso)
-		 typewriter ( "Apresentador da TV: O dia foi intenso, tivemos 12 mortes no banho de sangue:\n\n",falso)
-		
-		typewriter ( "Apresentador da TV: Emilly Sugg do distrito 1.\n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Cole Jones do distrito 3.\n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Sophie Lewis do distrito 3.\n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Hannah Stone do distrito 5.\n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Andrew Norton do distrito 6.\n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: David Butler do distrito 8.\n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Ellie Rivera do distrito 8.\n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Aaron Gray  do distrito 9.\n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Bryan Miller do distrito 10.\n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Chloe Clark do distrito 10.\n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Avery Allen do distrito 11. \n",falso)
-		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Liam Turner do distrito 12.",verdadeiro)
-
-		
+			Arma = "Faca"
+				
+			typewriter (NomePersonagem + ": Bom, isso vai me ajudar, agora só preciso de uma fonte de água.\n",verdadeiro)
+		}senao se(Resposta == 1 e sorteio == 2){
+			 typewriter (NomePersonagem + ": Comi a fruta, ela tinha um gosto amargo.\n",verdadeiro)
 		}
-		
-
-		}
+				
+			typewriter ( "Apresentador da TV: O dia foi intenso, tivemos 12 mortes no banho de sangue:\n\n",falso)
 			
-		
-	}
+			typewriter ( "Apresentador da TV: Emilly Sugg do distrito 1.\n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: Cole Jones do distrito 3.\n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: Sophie Lewis do distrito 3.\n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: Hannah Stone do distrito 5.\n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: Andrew Norton do distrito 6.\n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: David Butler do distrito 8.\n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: Ellie Rivera do distrito 8.\n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: Aaron Gray  do distrito 9.\n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: Bryan Miller do distrito 10.\n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: Chloe Clark do distrito 10.\n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: Avery Allen do distrito 11. \n",falso)
+			Util.aguarde(1000)
+			typewriter ( "Apresentador da TV: Liam Turner do distrito 12.",verdadeiro)
+		}
 	
-}
+	
 	
 	
 
@@ -515,10 +494,10 @@ programa
 		typewriter (" está com a perna machucada.\n",verdadeiro)
 		
 				 Resposta = pergunta(
-			" Acordar " +PersonagemSecundario+" ou fugir sozinho?.",  // Pergunta
+			"Acordar " + PersonagemSecundario + " ou fugir sozinho?.",  // Pergunta
 			
-			" Acordar " +PersonagemSecundario+ "", // Alternativa 1
-			"Fugir sozinho", // Alternativa 2
+			"Acordar " + PersonagemSecundario, // Alternativa 1
+			"Fugir Sozinho", // Alternativa 2
 			"", // Alternativa 3 (OPCIONAL)
 			""  // Alternativa 4 (OPCIONAL)
 
@@ -529,15 +508,19 @@ programa
 
 	    se (Resposta == 2)
 	    {
-typewriter(NomePersonagem + ": Eu começo a correr deixando "+PersonagemSecundario+ " para trás \n",falso)
-typewriter (NomePersonagem + ": As chamas chegam cada vez mais perto \n",falso)
-typewriter (NomePersonagem + ": As chamas chegam cada vez mais perto, um galho em chamas cai na minha frente. \n",falso)
-typewriter (NomePersonagem + ": Bloqueando meu caminho, tento passar mas acabo tropeço no galho. \n",verdadeiro)
+			typewriter("(Você começa a correr deixando " + PersonagemSecundario + " para trás)\n",falso)
+			typewriter (NomePersonagem + ": As chamas estão chegando cada vez mais perto...\n",falso)
+			typewriter ("(Um galho cai em sua frente, bloqueando seu caminho e fazendo você tropeçar)\n",verdadeiro)
+	    }senao{
+			typewriter ("Você empurra " + PersonagemSecundario + ", fazendo " + PronomeSecundario[3] + " acordar.\n",falso)
+		    	typewriter ("(Vocês rapidamente começam a correr, as chamas estão.\n",falso)
+		    	typewriter ("(Cada vez mais perto, um galho em chamas bloqueia o seu caminho)\n",verdadeiro)
+		    	typewriter (PersonagemSecundario + ": Me segura! Estou quase caindo.\n",falso)
+		    	typewriter ("(Você " + PronomeSecundario[5] + " segura e voltam a correr)",falso)
+		    	typewriter (NomePersonagem + ": Chegamos a um campo aberto onde o fogo não alcança...\n",verdadeiro)
+	    }
 
-// falta colocar quando for personagem feminino
- 
- typewriter ( "Apresentador da TV: O dia foi intenso, tivemos 12 mortes no banho de sangue:\n\n",falso)
-		
+		typewriter ( "Apresentador da TV: O dia foi intenso, tivemos 12 mortes no banho de sangue:\n\n",falso)
 		typewriter ( "Apresentador da TV: Emilly Sugg do distrito 1.\n",falso)
 		Util.aguarde(1000)
 		typewriter ( "Apresentador da TV: Cole Jones do distrito 3.\n",falso)
@@ -560,51 +543,9 @@ typewriter (NomePersonagem + ": Bloqueando meu caminho, tento passar mas acabo t
 		Util.aguarde(1000)
 		typewriter ( "Apresentador da TV: Avery Allen do distrito 11. \n",falso)
 		Util.aguarde(1000)
-		typewriter ( "Apresentador da TV: Liam Turner do distrito 12.\n",falso)
+		typewriter ( "Apresentador da TV: Liam Turner do distrito 12.\n",verdadeiro)
 		
-		esperarEnter()
 		typewriter ("Faça suas escolhas com sabedoria não deixe se guiar pelo medo.\n",verdadeiro)
-
-		Resposta = pergunta(
-			" Acordar"+PersonagemSecundario+" ou fugir sozinho?.",  // Pergunta
-			
-			" Acordar"+PersonagemSecundario+"", // Alternativa 1
-			"Fugir sozinho", // Alternativa 2
-			"", // Alternativa 3 (OPCIONAL)
-			""  // Alternativa 4 (OPCIONAL)
-			
-			
-
-		)
-
-    }senao{
-    	se (Resposta == 1)// acho que essa parte está errada porque acho que ele não lê que o 1 é masculino então o secundario é fem.
-    {
-    	typewriter (NomePersonagem + ": Empurro "+PersonagemSecundario+" fazendo a acordar.\n",falso)
-    	typewriter (NomePersonagem + ": Nós rapidamente começamos a correr, as chamas estão.\n",falso)
-    	typewriter (NomePersonagem + ": Cada vez mais perto, um galho em chamas bloqueia nosso caminho. \n",falso)
-    	esperarEnter()
-    	typewriter (NomePersonagem + ": " +PersonagemSecundario+ " me segura, quase caindo",falso)
-     typewriter (" ao mesmo tempo por causa da perna machucada.\n",falso)
-    	typewriter (NomePersonagem + ": A seguro e conseguimos voltar a correr",falso)
-    	typewriter (" chegamos a um campo aberto onde o fogo não alcança.\n",verdadeiro)
-    	
-
-    	
- }senao{
- 	typewriter (NomePersonagem + ":  Empurro "+PersonagemSecundario+" fazendo o acordar.\n",falso)
-    	typewriter (NomePersonagem + ": Nós rapidamente começamos a correr, as chamas estão.\n",falso)
-    	typewriter (NomePersonagem + ": Cada vez mais perto, um galho em chamas bloqueia nosso caminho.\n ",falso)
-    	esperarEnter()
-    	typewriter (NomePersonagem +  +PersonagemSecundario+ " me segura, quase caindo",falso)
-    	typewriter (" ao mesmo tempo por causa da perna machucada.\n",falso)
-     typewriter (NomePersonagem + ": O seguro e conseguimos voltar o correr",falso)
-    	typewriter (" chegamos a um campo aberto onde o fogo não alcança.\n",falso)
-    	esperarEnter()
-
-    	
- }
-    }
 	}
     	
 	
