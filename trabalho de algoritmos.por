@@ -420,6 +420,7 @@ programa
 		typewriter(PersonagemSecundario + ": ...\n",falso)
 		typewriter(PersonagemSecundario + ": Vamos nos revezar para vigiar e dormir.",verdadeiro)
 	
+    DiaDois()
 	}
 
 	funcao FinalFloresta(){
@@ -490,10 +491,9 @@ programa
 	{
 		typewriter(NomePersonagem + ": Estou no terceiro turno de vigia, quando começo a sentir cheiro de fumaça.\n",falso)
 		typewriter(NomePersonagem + ": Quando olhei para a floresta vi que as árvores estavam pegando fogo.\n",falso)
-		typewriter(NomePersonagem + ": O fogo está chegando cada vez mais perto "+PersonagemSecundario+ "",falso)
-		typewriter (" está com a perna machucada.\n",verdadeiro)
+		typewriter(NomePersonagem + ": O fogo está chegando cada vez mais perto "+PersonagemSecundario+ " está com a perna machucada",verdadeiro)
 		
-				 Resposta = pergunta(
+		Resposta = pergunta(
 			"Acordar " + PersonagemSecundario + " ou fugir sozinho?.",  // Pergunta
 			
 			"Acordar " + PersonagemSecundario, // Alternativa 1
