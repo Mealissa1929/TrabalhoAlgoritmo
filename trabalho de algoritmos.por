@@ -23,7 +23,7 @@ programa
 	logico PegouFaca = falso
 
 	// Variáveis de Status
-	real Forca = 50.0
+	real Forca = 4.0
 	real Vida = 100.0
 	inteiro Fome = 100
 	inteiro Sede = 100
@@ -31,7 +31,7 @@ programa
 	cadeia Arma = "Punhos"
 
 	// Listas Importantes
-	cadeia InformacoesItens[][] = { {"Pão", "15"} , {"Água", "5"} }
+	cadeia InformacoesItens[][] = { {"Pão", "15"} , {"Água", "5"} , {"Curativo", "30"} }
 	
 	// Imagens
 	cadeia ImagemFaca[] = {                                        
@@ -308,11 +308,55 @@ programa
 			
 			se(Morreu){
 				typewriter("\n" + Nome + " do distrito 12.\n",falso)
-				Util.aguarde(1000000)
+				enquanto(verdadeiro){
+					
+				}
 			}senao{
 				esperarEnter()
 			}
 			
+	}
+
+	funcao listarMortesDiaDois(logico Morreu){
+		inteiro Mortes = 8
+		se(Morreu){
+			Mortes++
+		}
+
+		cadeia NomeCompletoPrincipal
+		cadeia NomeCompletoSecundario
+		se(NomePersonagem == "Liam"){
+			NomeCompletoPrincipal = "Liam Turner"
+		}senao{
+			NomeCompletoPrincipal = "Emma Reed"
+		}
+
+		se(PersonagemSecundario == "Emma"){
+			NomeCompletoSecundario = "Emma Reed"
+		}senao{
+			NomeCompletoSecundario = "Liam Turner"
+		}
+		
+		typewriter ( "Apresentador da TV: Hoje tivemos mais " + Mortes + " mortes:\n\n",falso)
+
+		
+			typewriter("Josh Moore do distrito 1.\n",falso)
+			typewriter("Evan Conner do distrito 2.\n",falso)
+			typewriter("Ella Johson do distrito 4.\n",falso)
+			typewriter("Tyler Owens do distrito 5.\n",falso)
+			typewriter("Ryan Price do distrito 7.\n",falso)
+			typewriter("Amelia White do distrito 9.\n",falso)
+			typewriter("Austin Walker do distrito 11.\n",falso)
+			typewriter(NomeCompletoSecundario + " do distrito 12.\n",falso)
+			
+			se(Morreu){
+				typewriter("\n" + NomeCompletoPrincipal + " do distrito 12.\n",falso)
+				enquanto(verdadeiro){
+					
+				}
+			}senao{
+				esperarEnter()
+			}
 	}
 
 	funcao foiParaCornucopia(){
@@ -515,6 +559,57 @@ programa
 		typewriter("*Vendo o anúncio das mortes no céu*\n",falso)
 		typewriter(NomePersonagem + ": " + PronomeSecundario[2] + " " + PersonagemSecundario + " não morreu.\n",falso)
 		typewriter("Que bom...",verdadeiro)
+
+		typewriter("(Você está quase dormindo quando percebe chamas devorando as árvores e chegando cada vez mais perto)\n",falso)
+		typewriter("(Você se levanta para correr)",verdadeiro)
+
+		se(EscolheuColaborar){
+			typewriter("(Você corre sem olhar para trás)\n",falso)
+			typewriter("(Um galho em chamas cai rente aos seus olhos)\n",falso)
+			typewriter("(Você tropeça neste mesmo galho…)\n",falso)
+			typewriter("(Mas consegue se apoiar e levantar)\n",falso)
+			typewriter("(Você corre até um campo aberto onde as chamas não chegam)\n",verdadeiro)
+			
+			typewriter("(Você observa o grupo de carreiristas ainda dormindo no chão,\n",falso)
+			typewriter("mas Josh Moore está acordado de vigia)\n",falso)
+			typewriter ("*Carreiristas: tributos dos distritos 1, 2 e 4 que treinam para os jogos e se aliam entre eles.\n\n",falso)
+			typewriter("(Ele está distraído com o fogo)\n",falso)
+			typewriter("(Você aproveita para se esconder em meio às pedras)\n\n",falso)
+			typewriter(NomePersonagem + ": Eu deixei meus mantimentos lá.\n",falso) 
+			typewriter("Mas não vou atrás de comida, podem me ver.\n",verdadeiro)
+
+			typewriter("=== HORAS DEPOIS ===\n\n",falso)
+			typewriter("(Um paraquedas com mantimentos se choca com as pedras, fazendo barulho)\n\n",falso)
+			typewriter(NomePersonagem + ": São mantimentos, mas fizeram muito barulho.\n\n",falso)
+			typewriter("(Você pega os mantimentos mas Josh Moore e Evan Conner seguiram o barulho\n",falso)
+
+			adicionarAoInventario("Pão")
+			adicionarAoInventario("Curativo")
+			
+			typewriter("e você se pergunta como vai lutar com dois)\n\n",falso)
+			typewriter("(Mas " + PersonagemSecundario + " aparece e começa a lutar com Conner)\n",falso)
+			typewriter("(Você terá que lutar com Josh Moore)",verdadeiro)
+
+			luta("Josh Moore", 75.0, 6.0)
+
+			typewriter("(Você olha pro lado e vê Conner dar o golpe final em " + PersonagemSecundario + ")\n",falso) 
+			typewriter("(Você não pensa e pega o punhal da mão do tributo 1 e o ataca, também ganhando essa luta)\n",falso)
+			typewriter("(Então você se permite parar por alguns minutos e entender o que aconteceu)\n",falso)
+			typewriter("(Depois pega os mantimentos e armas dos tributos e foge para não pensar nisso)\n",verdadeiro)
+
+			adicionarAoInventario("Pão")
+			adicionarAoInventario("Água")
+			adicionarAoInventario("Curativo")
+
+			final()
+		}senao{
+			typewriter("(Você começa a correr com a perna machucada)\n",falso)
+			typewriter("(As chamas chegam cada vez mais perto)\n",falso)
+			typewriter("(Um galho em chamas cai rente aos seus olhos)\n",falso)
+			typewriter("(Você tropeça neste mesmo galho…)\n",verdadeiro)
+
+			listarMortesDiaDois(verdadeiro)
+		}
 	}
 	
 	
@@ -550,20 +645,73 @@ programa
 
 	    }senao{
 			typewriter ("Você empurra " + PersonagemSecundario + ", fazendo " + PronomeSecundario[3] + " acordar.\n",falso)
-		    	typewriter ("(Vocês rapidamente começam a correr, as chamas estão.\n",falso)
-		    	typewriter ("(Cada vez mais perto, um galho em chamas bloqueia o seu caminho)\n",falso)
-		    	typewriter (PersonagemSecundario + ": Me segura! Estou quase caindo.\n",falso)
-		    	typewriter ("(Você " + PronomeSecundario[5] + " segura e voltam a correr)",falso)
-		    	typewriter (NomePersonagem + ": Chegamos a um campo aberto onde o fogo não alcança...\n",falso)
-		    	typewriter ("(Observam o grupo de carreirristas ainda dormindo no chão, mas Josh Moore está acordado de vigia.)\n",falso)
-		    	typewriter ("*Carreiristas: tributos dos distritos 1, 2 e 4 que treinam para os jogos e se aliam enter eles.\n",falso)
+		    	typewriter ("(Vocês rapidamente começam a correr, as chamas estão\n",falso)
+		    	typewriter ("cada vez mais perto, um galho em chamas bloqueia o seu caminho)\n\n",falso)
+		    	typewriter (PersonagemSecundario + ": Me segura! Estou quase caindo.\n\n",falso)
+		    	typewriter ("(Você " + PronomeSecundario[5] + " segura e voltam a correr)\n\n",falso)
+		    	typewriter (NomePersonagem + ": Chegamos a um campo aberto onde o fogo não alcança...\n",verdadeiro)
 		    	
+		    	typewriter ("(Vocês observam o grupo de carreirristas ainda dormindo no chão, mas Josh Moore está acordado de vigia.)\n",falso)
+		    	typewriter ("*Carreiristas: tributos dos distritos 1, 2 e 4 que treinam para os jogos e se aliam entre eles.\n\n",falso)
+		    	typewriter(NomePersonagem + " [entre sussurros]: Shhh, ele está distraído com o fogo, vamos nos esconder nas pedras.\n\n",falso)
+		    	typewriter("(Vocês vão se esconder)",verdadeiro)
+
+		    	typewriter(PersonagemSecundario + ": Você está bem? Deixamos todos os mantimentos para trás.\n",falso)
+		    	typewriter(NomePersonagem + ": Não tenho certeza, mas não tem como ficarmos escondidos aqui.\n",falso)
+		    	typewriter(PersonagemSecundario + ": Podemos esperar que eles estejam lutando entre si.\n",falso)
+		    	typewriter(NomePersonagem + ": Como vamos esperar sem comida e água?\n",falso)
+
+			se(EscolheuColaborar){
+				typewriter(PersonagemSecundario + ": Ficamos um dia, nós tiramos notas boas, podem nos mandar algo, senão a gente vê o que faz.\n",falso)
+				typewriter(NomePersonagem + ": Tudo bem, mas devemos nos manter em silêncio.\n",verdadeiro)
+
+				typewriter("=== HORAS DEPOIS ===\n\n",falso)
+
+				typewriter("(" + PersonagemSecundario + " está dormindo)\n",falso)
+				typewriter("(Um paraquedas com mantimentos se choca com as pedras fazendo barulho)\n\n",falso)
+				typewriter(PersonagemSecundario + ": O que é isso?\n",falso)
+				typewriter(NomePersonagem + ": Mantimentos, mas fizeram muito barulho.\n\n",falso)
+
+				adicionarAoInventario("Pão")
+				adicionarAoInventario("Curativo")
+
+				typewriter("(Você pega os mantimentos mas Josh Moore e Evan Conner seguiram o barulho,\n",falso)
+				typewriter("você terá que lutar com Moore e " + PersonagemSecundario + " com Conner)",verdadeiro)
+			}senao{
+				typewriter(PersonagemSecundario + ": Vamos esperar um dia, não sabemos se tem comida por perto e os carreiristas estão à espreita.\n",falso)
+				typewriter(NomePersonagem + ": Tudo bem, mas devemos nos manter em silêncio.",verdadeiro)
+
+				typewriter("=== HORAS DEPOIS ===\n\n",falso)
+
+				typewriter("(" + PersonagemSecundario + " está dormindo)\n",falso)
+				typewriter("(Você decide procurar por comida sem ir longe)\n",falso)
+				typewriter("(Depois de minutos procurando você acaba se cortando em uma pedra e soltando um grito involuntário)\n",falso)
+				typewriter("(Volta rapidamente para o esconderijo com medo de ser seguid" + Pronome[5] + ".\n\n",falso)
+				typewriter(PersonagemSecundario + ": O que aconteceu?\n\n",falso)
+				typewriter("(Você não tem tempo de responder pois Josh Moore e Evan Conner seguiram o barulho,\n",falso)
+				typewriter("você tem que lutar com Moore e " + PersonagemSecundario + " com Conner)",verdadeiro)
+			}
+
+			luta("Josh Moore", 75.0, 6.0)
+
+			typewriter("(Você olha pro lado e vê Conner dar o golpe final em " + PersonagemSecundario + ")\n",falso) 
+			typewriter("(Você não pensa e pega o punhal da mão do tributo 1 e o ataca, também ganhando essa luta)\n",falso)
+			typewriter("(Então você se permite parar por alguns minutos e entender o que aconteceu)\n",falso)
+			typewriter("(Depois pega os mantimentos e armas dos tributos e foge para não pensar nisso)\n",verdadeiro)
+
+			adicionarAoInventario("Pão")
+			adicionarAoInventario("Água")
+			adicionarAoInventario("Curativo")
+
+			final()
 	    }
 
 		
 	}
     	
-	
+	funcao final(){
+		
+	}
 	
 	
 
@@ -676,6 +824,7 @@ programa
 				Vida -= Dano
 			}senao{
 				typewriter("Você venceu a luta!", verdadeiro)
+				Vida = 100.0
 				pare
 			}
 
