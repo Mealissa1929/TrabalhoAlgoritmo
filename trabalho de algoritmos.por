@@ -773,7 +773,7 @@ programa
 		escreva("\nEscolha um item ou digite \"SAIR\" para sair do inventário.\n")
 		leia(ItemEscolhido)
 
-		se(ItemEscolhido != "SAIR" e ItemEscolhido != ""){
+		se(ItemEscolhido != "SAIR" e ItemEscolhido != "sair" e ItemEscolhido != ""){
 			inteiro Escolhido = Tipos.cadeia_para_inteiro(ItemEscolhido, 10)
 			
 			para(inteiro i = 0; i < 100; i++){
@@ -879,7 +879,7 @@ programa
 	funcao typewriter(cadeia TextoParaType, logico Esperar){
 		para(inteiro i = 0; i < Texto.numero_caracteres(TextoParaType); i++){
 			escreva(Texto.extrair_subtexto(TextoParaType, i, i+1))
-			Util.aguarde(0)
+			Util.aguarde(17)
 		}
 		se(Esperar){
 			esperarEnter()
