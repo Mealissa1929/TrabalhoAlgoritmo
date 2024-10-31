@@ -738,7 +738,7 @@ programa
           esperarEnter()
           luta("Olive Sanders e Scarlet Foster",100.0,10.0)
           esperarEnter()
-          typewriter("Apresentador: E " + NomeCompletoPrincipal + " é "+ Pronome[5] +" vencedor da 53° edição dos jogos vorazes!!!", falso) 
+          typewriter("Apresentador na TV: E " + NomeCompletoPrincipal + " é "+ Pronome[5] +" vencedor da 53° edição dos jogos vorazes!!!", falso) 
           typewriter(" Meus parabéns\n", falso)
          typewriter("Principal: Eu sobrevivi…\n", falso)
          typewriter("(Mas será que isso é o melhor que poderia ter acontecido?)\n",verdadeiro)
