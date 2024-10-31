@@ -16,8 +16,8 @@ programa
 	inteiro Resposta = 0
 
 	// Escolhas
-	logico EscolheuSeAliar = falso
-	logico EscolheuColaborar = falso
+	logico EscolheuSeAliar = verdadeiro
+	logico EscolheuColaborar = verdadeiro
 	logico PassouPorCornucopia = falso
 	logico PegouMantimentos = falso
 	logico PegouFaca = falso
@@ -425,7 +425,7 @@ programa
 		typewriter(NomePersonagem + ": " + PersonagemSecundario + "?\n\n",falso)
 
 		se(PegouFaca){
-			typewriter("(Você ameaça com a faca, buscando se defender)",verdadeiro)
+			typewriter("(Você aponta a faca para "+ PersonagemSecundario + ", buscando se defender)",verdadeiro)
 		}senao{
 			typewriter("(Você começa a andar para trás, buscando se defender)",verdadeiro)	
 		}
@@ -710,6 +710,40 @@ programa
 	}
     	
 	funcao final(){
+		cadeia NomeCompletoPrincipal
+		se(NomePersonagem == "Liam"){
+			NomeCompletoPrincipal = "Liam Turner"
+		}senao{
+			NomeCompletoPrincipal = "Emma Reed"
+		}
+		typewriter("(Você espia os carreiristas e vê que só sobraram a tributo do 2 e o do 4) \n", falso)
+          typewriter("(Segue escondid"+Pronome[5]+" entre as pedras pensando em quantos tributos faltam)\n", falso)
+          typewriter("(Principal: Melhor esperar para ver quantos faltam daqui algumas horas) \n", falso)
+           esperarEnter()
+          listarMortesDiaDois(falso)
+          esperarEnter()
+          typewriter("(Vendo o anúncio das mortes no céu*)\n", falso)
+          typewriter("Principal: Só faltam 4 além de mim\n", falso)
+          typewriter("(Você volta a espionar os últimos carreiristas e os encontra lutando) \n", falso)
+          typewriter("(Brandon Smith derrota Ava Brown)\n", falso)
+          typewriter("(E enquanto ele ainda está respirando forte ", falso)
+          typewriter("você decide correr e lutar contra ele)\n", falso)
+          esperarEnter()
+          luta("Brandon Smith",50.0,5.0)
+          typewriter("(Você vence e ouve barulhos, animais irreconhecíveis mas que mordem começam a te perseguir)\n", falso)
+          typewriter("(Você corre já sabendo que está sendo levad"+Pronome [5]+"para enfrentar os dois últimos tributos)\n", falso)
+          typewriter("(Chega na cornucópia e vê Olivia Sanders e Scarlett Foster se preparando para lutar uma contra a outra)\n", falso)
+          typewriter("Apresentador na tv: Esta é uma final impensável, quem diria que os distritos ", falso)
+          typewriter ("6, 7 e 12 estariam disputando o prêmio?\n", falso)
+          esperarEnter()
+          luta("Olive Sanders e Scarlet Foster",100.0,10.0)
+          esperarEnter()
+          typewriter("Apresentador: E " + NomeCompletoPrincipal + " é "+ Pronome[5] +" vencedor da 53° edição dos jogos vorazes!!!", falso) 
+          typewriter(" Meus parabéns\n", falso)
+         typewriter("Principal: Eu sobrevivi…\n", falso)
+         typewriter("(Mas será que isso é o melhor que poderia ter acontecido?)\n",verdadeiro)
+
+
 		
 	}
 	
