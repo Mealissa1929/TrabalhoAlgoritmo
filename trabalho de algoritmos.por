@@ -425,7 +425,7 @@ programa
 		typewriter(NomePersonagem + ": " + PersonagemSecundario + "?\n\n",falso)
 
 		se(PegouFaca){
-			typewriter("(Você aponta a faca para "+ PersonagemSecundario + ", buscando se defender)",verdadeiro)
+			typewriter("(Você "+Pronome[5]+" ameaça coma a faca, buscando se defender)",verdadeiro)
 		}senao{
 			typewriter("(Você começa a andar para trás, buscando se defender)",verdadeiro)	
 		}
@@ -731,7 +731,7 @@ programa
           esperarEnter()
           luta("Brandon Smith",50.0,5.0)
           typewriter("(Você vence e ouve barulhos, animais irreconhecíveis mas que mordem começam a te perseguir)\n", falso)
-          typewriter("(Você corre já sabendo que está sendo levad"+Pronome [5]+"para enfrentar os dois últimos tributos)\n", falso)
+          typewriter("(Você corre já sabendo que está sendo levad"+Pronome [5]+" para enfrentar os dois últimos tributos)\n", falso)
           typewriter("(Chega na cornucópia e vê Olivia Sanders e Scarlett Foster se preparando para lutar uma contra a outra)\n", falso)
           typewriter("Apresentador na tv: Esta é uma final impensável, quem diria que os distritos ", falso)
           typewriter ("6, 7 e 12 estariam disputando o prêmio?\n", falso)
